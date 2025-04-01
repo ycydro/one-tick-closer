@@ -50,8 +50,11 @@ startButton.addEventListener('click', (event) => {
    }, 1000);
 });
 
-resetButton.addEventListener('click', (event) => {
-   startButton.click();   
+resetButton.addEventListener('click', () => {
+   
+   if (startButton.innerHTML === 'Stop') {
+      startButton.click();
+   }
 
    pomodoro.minutes = 3;
    pomodoro.seconds = 0;
