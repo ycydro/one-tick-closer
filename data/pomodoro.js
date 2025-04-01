@@ -1,1 +1,1 @@
-export const pomodoro = { minutes: 25, seconds: 30 }
+export const pomodoro = { minutes: 3, seconds: 0 }

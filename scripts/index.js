@@ -1,5 +1,5 @@
 import { pomodoro } from '../data/pomodoro.js';
-import { isEndOfMinute } from './utils/time.js';
+import { isEndOfMinute, formatTime } from './utils/time.js';
 
 const timerButton = document.getElementById('timer-button');
 
@@ -10,7 +10,7 @@ function displayTimer() {
    timerHTML =
    `
       <div id="timer-string">
-         ${minutes}:${seconds}            
+         ${formatTime(minutes, seconds)}            
       </div>
    `
 
@@ -36,7 +36,7 @@ timerButton.addEventListener('click', (event) => {
          displayTimer();
          return;
       }
-      
+
       pomodoro.seconds--;
       displayTimer();
    }, 1000);
