@@ -1,7 +1,8 @@
 import { pomodoro } from '../data/pomodoro.js';
 import { isEndOfMinute, formatTime } from './utils/time.js';
 
-const timerButton = document.getElementById('timer-button');
+const startButton = document.getElementById('start-button');
+const resetButton = document.getElementById('reset-button');
 
 function displayTimer() {
    let timerHTML = '';
@@ -12,7 +13,7 @@ function displayTimer() {
       <div id="timer-string">
          ${formatTime(minutes, seconds)}            
       </div>
-   `
+   `;
 
    document.querySelector('.container').innerHTML = timerHTML;
 }
@@ -25,7 +26,7 @@ displayTimer();
 
 let intervalId = '';
 
-timerButton.addEventListener('click', (event) => {
+startButton.addEventListener('click', (event) => {
    changeWebTitle();
    if (event.target.innerHTML === 'Stop') {
       clearInterval(intervalId);
@@ -47,4 +48,13 @@ timerButton.addEventListener('click', (event) => {
       changeWebTitle();
       displayTimer();
    }, 1000);
+});
+
+resetButton.addEventListener('click', (event) => {
+   startButton.click();   
+
+   pomodoro.minutes = 3;
+   pomodoro.seconds = 0;
+   changeWebTitle();
+   displayTimer();
 });
