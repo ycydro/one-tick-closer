@@ -3,7 +3,6 @@ export function isEndOfMinute(seconds) {
 }
 
 export function formatTime(minutes, seconds) {
-
    let formattedMinutes = minutes.toString().padStart(2, "0");
    let formattedSeconds = seconds.toString().padStart(2, "0");
 

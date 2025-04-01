@@ -17,10 +17,16 @@ function displayTimer() {
    document.querySelector('.container').innerHTML = timerHTML;
 }
 
+function changeWebTitle() {
+   document.title = `${formatTime(pomodoro.minutes, pomodoro.seconds)} ── .✦ One Tick Closer`;
+}
+
 displayTimer();
 
 let intervalId = '';
+
 timerButton.addEventListener('click', (event) => {
+   changeWebTitle();
    if (event.target.innerHTML === 'Stop') {
       clearInterval(intervalId);
       event.target.innerHTML = 'Start';
@@ -29,15 +35,16 @@ timerButton.addEventListener('click', (event) => {
 
    event.target.innerHTML = 'Stop';
    intervalId = setInterval(() => {
-
       if(isEndOfMinute(pomodoro.seconds)) {
          pomodoro.minutes--;
          pomodoro.seconds = 59;
+         changeWebTitle();
          displayTimer();
          return;
       }
-
+      
       pomodoro.seconds--;
+      changeWebTitle();
       displayTimer();
    }, 1000);
 });
