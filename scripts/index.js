@@ -1,12 +1,9 @@
-import { pomodoro } from '../data/pomodoro.js';
+import { timer, DEFAULT_MINUTES, DEFAULT_SECONDS } from '../data/pomodoro.js';
 import { isEndOfMinute, formatTime } from './utils/time.js';
-
-const startButton = document.getElementById('start-button');
-const resetButton = document.getElementById('reset-button');
 
 function displayTimer() {
    let timerHTML = '';
-   const { minutes, seconds } = pomodoro;
+   const { minutes, seconds } = timer;
 
    timerHTML =
    `
@@ -15,14 +12,21 @@ function displayTimer() {
       </div>
    `;
 
-   document.querySelector('.container').innerHTML = timerHTML;
+   document.querySelector('.timer-container').innerHTML = timerHTML;
 }
 
 function changeWebTitle() {
-   document.title = `${formatTime(pomodoro.minutes, pomodoro.seconds)} ── .✦ One Tick Closer`;
+   document.title = `${formatTime(timer.minutes, timer.seconds)} ── .✦ One Tick Closer`;
 }
 
 displayTimer();
+
+
+const startButton = document.getElementById('start-button');
+const resetButton = document.getElementById('reset-button');
+const pomodoroButton = document.getElementById('pomodoro-btn');
+const shortBreakButton = document.getElementById('short-break-btn');
+const longBreakButton = document.getElementById('long-break-btn');
 
 let intervalId = '';
 
@@ -36,28 +40,60 @@ startButton.addEventListener('click', (event) => {
 
    event.target.innerHTML = 'Stop';
    intervalId = setInterval(() => {
-      if(isEndOfMinute(pomodoro.seconds)) {
-         pomodoro.minutes--;
-         pomodoro.seconds = 59;
+      if(isEndOfMinute(timer.seconds)) {
+         timer.minutes--;
+         timer.seconds = 59;
          changeWebTitle();
          displayTimer();
          return;
       }
       
-      pomodoro.seconds--;
+      timer.seconds--;
       changeWebTitle();
       displayTimer();
    }, 1000);
 });
 
 resetButton.addEventListener('click', () => {
-   
    if (startButton.innerHTML === 'Stop') {
       startButton.click();
    }
 
-   pomodoro.minutes = 3;
-   pomodoro.seconds = 0;
+   timer.minutes = DEFAULT_MINUTES;
+   timer.seconds = DEFAULT_SECONDS;
+   changeWebTitle();
+   displayTimer();
+});
+
+pomodoroButton.addEventListener('click', () => {
+   if (startButton.innerHTML === 'Stop') {
+      startButton.click();
+   }
+
+   timer.minutes = DEFAULT_MINUTES;
+   timer.seconds = DEFAULT_SECONDS;
+   changeWebTitle();
+   displayTimer();
+});
+
+shortBreakButton.addEventListener('click', () => {
+   if (startButton.innerHTML === 'Stop') {
+      startButton.click();
+   }
+   
+   timer.minutes = 5;
+   timer.seconds = 0;
+   changeWebTitle();
+   displayTimer();
+});
+
+longBreakButton.addEventListener('click', () => {
+   if (startButton.innerHTML === 'Stop') {
+      startButton.click();
+   }
+   
+   timer.minutes = 10;
+   timer.seconds = 0;
    changeWebTitle();
    displayTimer();
 });

@@ -1,0 +1,35 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+   gap: 3rem;
+   justify-content: center;
+   align-items: center;
+}
+
+button {
+   padding: 3px 7px;
+   cursor: pointer;
+}
+
+.timer-options {
+   display: flex;
+   width: auto;
+}
+
+.timer-option-container {
+   display: flex;
+   justify-content: center;
+   width: 7rem;
+}
+
+.timer-option {
+   padding: 3px 7px;
+}
+
