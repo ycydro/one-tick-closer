@@ -1,4 +1,5 @@
-import { pomodoro } from '../data/timers.js';
+import { pomodoro } from '../data/pomodoro.js';
+import { isEndOfMinute } from './utils/time.js';
 
 const timerButton = document.getElementById('timer-button');
 
@@ -25,10 +26,18 @@ timerButton.addEventListener('click', (event) => {
       event.target.innerHTML = 'Start';
       return;
    }
+
    event.target.innerHTML = 'Stop';
-   const { minutes, seconds } = pomodoro;
    intervalId = setInterval(() => {
+
+      if(isEndOfMinute(pomodoro.seconds)) {
+         pomodoro.minutes--;
+         pomodoro.seconds = 59;
+         displayTimer();
+         return;
+      }
+      
       pomodoro.seconds--;
       displayTimer();
-   }, 1000)
+   }, 1000);
 });
