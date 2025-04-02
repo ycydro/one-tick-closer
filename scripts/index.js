@@ -1,5 +1,7 @@
-import { timer, DEFAULT_MINUTES, DEFAULT_SECONDS } from '../data/pomodoro.js';
+import { timer, setTimer} from '../data/pomodoro.js';
 import { isEndOfMinute, formatTime } from './utils/time.js';
+
+displayTimer();
 
 function displayTimer() {
    let timerHTML = '';
@@ -19,8 +21,7 @@ function changeWebTitle() {
    document.title = `${formatTime(timer.minutes, timer.seconds)} ── .✦ One Tick Closer`;
 }
 
-displayTimer();
-
+//BUTTON SETTINGS
 
 const startButton = document.getElementById('start-button');
 const resetButton = document.getElementById('reset-button');
@@ -29,71 +30,52 @@ const shortBreakButton = document.getElementById('short-break-btn');
 const longBreakButton = document.getElementById('long-break-btn');
 
 let intervalId = '';
+let timerMode = 'pomodoro';
+let isTimerRunning = false;
 
-startButton.addEventListener('click', (event) => {
+function setTimerMode(mode) {
+   if (isTimerRunning) {
+      startButton.click();
+   }
+
+   timerMode = mode;
+   setTimer(mode);
+   updateUI();
+}
+
+function updateUI() {
    changeWebTitle();
-   if (event.target.innerHTML === 'Stop') {
+   displayTimer();
+}
+
+startButton.addEventListener('click', (e) => {
+   updateUI();
+
+   if (isTimerRunning) {
       clearInterval(intervalId);
-      event.target.innerHTML = 'Start';
+      e.target.innerHTML = 'Start';
+      isTimerRunning = false;
       return;
    }
 
-   event.target.innerHTML = 'Stop';
+   e.target.innerHTML = 'Stop';
+   isTimerRunning = true;
+
    intervalId = setInterval(() => {
       if(isEndOfMinute(timer.seconds)) {
          timer.minutes--;
          timer.seconds = 59;
-         changeWebTitle();
-         displayTimer();
+         updateUI();
          return;
       }
       
       timer.seconds--;
-      changeWebTitle();
-      displayTimer();
+      updateUI();
    }, 1000);
+
 });
 
-resetButton.addEventListener('click', () => {
-   if (startButton.innerHTML === 'Stop') {
-      startButton.click();
-   }
-
-   timer.minutes = DEFAULT_MINUTES;
-   timer.seconds = DEFAULT_SECONDS;
-   changeWebTitle();
-   displayTimer();
-});
-
-pomodoroButton.addEventListener('click', () => {
-   if (startButton.innerHTML === 'Stop') {
-      startButton.click();
-   }
-
-   timer.minutes = DEFAULT_MINUTES;
-   timer.seconds = DEFAULT_SECONDS;
-   changeWebTitle();
-   displayTimer();
-});
-
-shortBreakButton.addEventListener('click', () => {
-   if (startButton.innerHTML === 'Stop') {
-      startButton.click();
-   }
-   
-   timer.minutes = 5;
-   timer.seconds = 0;
-   changeWebTitle();
-   displayTimer();
-});
-
-longBreakButton.addEventListener('click', () => {
-   if (startButton.innerHTML === 'Stop') {
-      startButton.click();
-   }
-   
-   timer.minutes = 10;
-   timer.seconds = 0;
-   changeWebTitle();
-   displayTimer();
-});
+resetButton.addEventListener('click', ()=> setTimerMode(timerMode));
+pomodoroButton.addEventListener('click', ()=> setTimerMode("pomodoro"));
+shortBreakButton.addEventListener('click', ()=> setTimerMode("shortBreak"));
+longBreakButton.addEventListener('click', ()=> setTimerMode("longBreak"));
