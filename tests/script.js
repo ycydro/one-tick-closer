@@ -1,18 +1,19 @@
-import { Timer } from  './objects/Timer.js';
+import { Timer } from  '../objects/PomodoroTimer.js';
 
 
 const toggleButton = document.getElementById('toggle-btn');
 const resetButton = document.getElementById('reset-btn');
 
-const pomodoro = new Timer(4, 9);
 
+
+const timer = new Timer();
 
 toggleButton.addEventListener('click', () => toggleTimer());
-resetButton.addEventListener('click', () => { toggleTimer(); pomodoro.reset() });
+resetButton.addEventListener('click', () => { toggleTimer(); timer.reset(); });
 
 function toggleTimer() {
    const isRunning = toggleButton.innerHTML === "Start";
    toggleButton.innerHTML = isRunning ? "Stop" : "Start";
-   pomodoro.toggle();
+   timer.toggle();
 }
 
