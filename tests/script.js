@@ -1,9 +1,7 @@
 import { Timer } from  '../objects/PomodoroTimer.js';
 
-
 const toggleButton = document.getElementById('toggle-btn');
 const resetButton = document.getElementById('reset-btn');
-
 
 
 const timer = new Timer();

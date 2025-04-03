@@ -1,3 +1,5 @@
+import { tracker } from './TimeTracker.js'
+
 export class PomodoroTimer {
    #intervalID;
    #isTimeRunning = false;
@@ -25,7 +27,7 @@ export class PomodoroTimer {
       this.#isTimeRunning = true;
 
       this.#intervalID = setInterval(() => {
-         this.#tick();
+         this.#tick()
       }, 1000);   
    }
       
@@ -78,11 +80,20 @@ export class PomodoroTimer {
       } else {
          this.seconds--;
       }
+      this.#trackTime();
       this.updateUI();
    }
 
    #setTime(mode) {
       this.minutes = this.#TIMER_MODES[mode].minutes;
       this.seconds = this.#TIMER_MODES[mode].seconds;
+   }
+
+   #trackTime() {
+      if (this.mode !== 'pomodoro') return;
+
+      tracker.totalSeconds += 1;
+      tracker.saveTrackedTime();
+      console.log(tracker.totalSeconds);
    }
 }
