@@ -44,6 +44,7 @@ export class PomodoroTimer {
       this.stop();
       this.minutes = this.#TIMER_MODES[this.mode].minutes;
       this.seconds = this.#TIMER_MODES[this.mode].seconds;
+      
       this.updateUI();
    }
 
@@ -53,6 +54,7 @@ export class PomodoroTimer {
       this.stop();
       this.mode = mode;
       this.#setTime(mode);
+
       this.updateUI();
    }
 
@@ -80,7 +82,9 @@ export class PomodoroTimer {
       } else {
          this.seconds--;
       }
+
       this.#trackTime();
+
       this.updateUI();
    }
 
@@ -92,8 +96,9 @@ export class PomodoroTimer {
    #trackTime() {
       if (this.mode !== 'pomodoro') return;
 
+      // saves the total running time of pomodoro timer (doesn't track break timers) in TimeTracker
       tracker.totalSeconds += 1;
-      tracker.saveTrackedTime();
-      console.log(tracker.totalSeconds);
+      tracker.saveTime();
+      console.log(`Total time studied: ${tracker.totalSeconds} seconds`);
    }
 }

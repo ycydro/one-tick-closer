@@ -6,31 +6,14 @@ const timer = new PomodoroTimer(updateUI);
 displayTotalStudyTime();
 displayTimer(timer.minutes, timer.seconds);
 
-let trackerID;
-
-function startTracker() {
-    setTimeout(() => {
-        trackerID = setInterval(() => {
-            console.log(`refreshing HTML...`);
-            console.log(`Total Minutes Studies ${tracker.getMinutes()}`);
-            displayTotalStudyTime();
-        }, 10000);
-    }, 10000);
-}
-
-startTracker();
-
-
 function displayTotalStudyTime() {
    let tstHTML = 
    `
-    <p> You have studied for <span id="total-study-time">${tracker.getMinutes()} minutes</span> so far! </p>   
+    <p> You have studied for <span id="total-study-time">${tracker.show()}</span> so far! </p>   
    `
 
    document.querySelector('.tst-container').innerHTML = tstHTML;
 }
-
-
 
 function updateUI(minutes, seconds) {
    displayTimer(minutes, seconds);
@@ -58,6 +41,18 @@ function changeWebTitle(minutes, seconds) {
 
 const toggleButton = document.getElementById('toggle-btn');
 
+let trackerID;
+let isTracking = false;
+
+function startTracker() {
+    setTimeout(() => {
+        trackerID = setInterval(() => {
+            console.log(`refreshing HTML...`);
+            displayTotalStudyTime();
+        }, 30000);
+    }, 5000);
+}
+
 function isToggled() {
    return toggleButton.innerHTML === "Stop";
 }
@@ -69,7 +64,10 @@ const longBreakButton = document.getElementById('long-break-btn');
 
 toggleButton.addEventListener('click', function() { 
    this.innerHTML = isToggled() ? "Start" : "Stop";  
-   timer.toggle(); 
+   timer.toggle();
+
+   if (isTracking) return;
+   startTracker(); 
 });
 
 resetButton.addEventListener('click', () => { 
