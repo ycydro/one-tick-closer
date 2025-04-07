@@ -63,7 +63,8 @@ const shortBreakButton = document.getElementById('short-break-btn');
 const longBreakButton = document.getElementById('long-break-btn');
 
 toggleButton.addEventListener('click', function() { 
-   this.innerHTML = isToggled() ? "Start" : "Stop";  
+   this.innerHTML = isToggled() ? "Start" : "Stop"; 
+   this.style.backgroundColor = isToggled() ? "#6A1E55" : "#56021F";
    timer.toggle();
 
    if (isTracking) return;

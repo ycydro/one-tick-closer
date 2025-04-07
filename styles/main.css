@@ -2,9 +2,12 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: "Poppins", sans-serif;
 }
 
 body {
+   background-color: #BE5985;
+   color: whitesmoke;
    display: flex;
    flex-direction: column;
    height: 100vh;
@@ -14,7 +17,10 @@ body {
 }
 
 button {
-   padding: 3px 7px;
+   font-size: 1rem;
+   border-radius: 12px;
+   color: #FFEDFA;
+   border: none;
    cursor: pointer;
 }
 
@@ -30,6 +36,15 @@ button {
 }
 
 .timer-option {
-   padding: 3px 7px;
+   padding: 0.5rem;
+   background-color: #AC1754;
 }
 
+.timer-container {
+   font-size: 10rem;
+}
+
+.pomodoro-action {
+   padding: 0.3rem 0.75rem;
+   background-color: #56021F;
+}
