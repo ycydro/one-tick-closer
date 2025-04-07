@@ -99,6 +99,6 @@ export class PomodoroTimer {
       // saves the total running time of pomodoro timer (doesn't track break timers) in TimeTracker
       tracker.totalSeconds += 1;
       tracker.saveTime();
-      console.log(`Total time studied: ${tracker.totalSeconds} seconds`);
+      console.log(`Total time studied: ${tracker.show()}`);
    }
 }

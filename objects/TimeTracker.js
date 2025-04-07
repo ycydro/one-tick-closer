@@ -6,19 +6,27 @@ class TimeTracker {
    }
    
    show() {
+      const SECONDS = this.#formatTimeUnit(this.totalSeconds % 60, 'second');
+      const MINUTES = this.#formatTimeUnit(this.getMinutes() % 60, 'minute');
+      const HOURS = this.#formatTimeUnit(this.getHours() % 24, 'hour');
+      const DAYS = this.#formatTimeUnit(this.getDays(), 'day');
+
+      let timeStudied = '';
+
       if (this.getDays()) {
-         return this.#formatTimeUnit(this.getDays(), 'day');
+         timeStudied += `${DAYS}, `;
        }
        if (this.getHours()) {
-         return this.#formatTimeUnit(this.getHours(), 'hour');
+         timeStudied += `${HOURS}, `;
        }
       if (this.getMinutes()) {
-         return `${this.#formatTimeUnit(this.getMinutes(), 'minute')}`;
+         timeStudied += `${MINUTES}, `
        }
-
       if (this.totalSeconds >= 0) {
-         return this.#formatTimeUnit(this.totalSeconds, 'second');
+         timeStudied += SECONDS
       } 
+   
+      return timeStudied;
    }
 
    getMinutes() {

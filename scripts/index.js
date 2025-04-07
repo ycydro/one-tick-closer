@@ -49,8 +49,8 @@ function startTracker() {
         trackerID = setInterval(() => {
             console.log(`refreshing HTML...`);
             displayTotalStudyTime();
-        }, 30000);
-    }, 5000);
+        }, 300000);
+    }, 1000);
 }
 
 function isToggled() {
