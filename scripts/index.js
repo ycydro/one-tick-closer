@@ -57,6 +57,25 @@ function isToggled() {
    return toggleButton.innerHTML === "Stop";
 }
 
+
+document.querySelectorAll('.timer-option').forEach((button) => {
+   button.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('is-option-toggled')) {
+         // check if any other button is toggled thern turn it off
+         turnOffToggledButton();
+         e.target.classList.add('is-option-toggled')
+      }
+   });     
+});
+
+function turnOffToggledButton() {
+   const toggledButton = document.querySelector('.is-option-toggled');
+   if(toggledButton) {
+      toggledButton.classList.remove('is-option-toggled');
+   }
+}
+
+
 const resetButton = document.getElementById('reset-btn');
 const pomodoroButton = document.getElementById('pomodoro-btn');
 const shortBreakButton = document.getElementById('short-break-btn');
@@ -64,7 +83,7 @@ const longBreakButton = document.getElementById('long-break-btn');
 
 toggleButton.addEventListener('click', function() { 
    this.innerHTML = isToggled() ? "Start" : "Stop"; 
-   this.style.backgroundColor = isToggled() ? "#6A1E55" : "#56021F";
+   this.style.backgroundColor = isToggled() ? "var(--default-pink)" : "#56021F";
    timer.toggle();
 
    if (isTracking) return;
@@ -72,7 +91,9 @@ toggleButton.addEventListener('click', function() {
 });
 
 resetButton.addEventListener('click', () => { 
-   toggleButton.innerHTML = 'Start'; 
+   if (isToggled()) {
+      toggleButton.click();
+   }
    timer.reset(); 
 });
 
@@ -90,6 +111,7 @@ longBreakButton.addEventListener('click', () => {
    resetButton.click();
    timer.setMode('longBreak') 
 });
+
 
 
 

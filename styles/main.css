@@ -1,3 +1,7 @@
+:root {
+   --default-pink: rgb(255, 3, 108);
+}
+
 * {
    margin: 0;
    padding: 0;
@@ -6,8 +10,14 @@
 }
 
 body {
-   background-color: #BE5985;
-   color: whitesmoke;
+   background: no-repeat center/100% url(../assets/heart-background.jpg);
+   background-color: #fac6ec;
+   /* background-image: url(../assets/heart-background.jpg);
+   background-position: center;
+   background-size: contain;
+   background-repeat: repeat; */
+   backdrop-filter: blur(7px);
+   color: var(--default-pink);
    display: flex;
    flex-direction: column;
    height: 100vh;
@@ -18,33 +28,56 @@ body {
 
 button {
    font-size: 1rem;
-   border-radius: 12px;
-   color: #FFEDFA;
+   border-radius: 24px;
+   color: whitesmoke;
+   background-color: #56021F;
    border: none;
    cursor: pointer;
 }
 
 .timer-options {
    display: flex;
-   width: auto;
+   gap: 2rem;
 }
 
 .timer-option-container {
    display: flex;
    justify-content: center;
-   width: 7rem;
+   width: min(auto, 10rem);
 }
 
 .timer-option {
-   padding: 0.5rem;
-   background-color: #AC1754;
+   transition: all 0.345s;
+   padding: 0.5rem 1rem;
 }
 
 .timer-container {
-   font-size: 10rem;
+   font-size: clamp(5rem, -1rem + 8.333vw, 10rem);
 }
 
 .pomodoro-action {
    padding: 0.3rem 0.75rem;
-   background-color: #56021F;
+}
+
+.timer-option:hover,
+.is-option-toggled {
+   color: rgb(255, 255, 255);
+   border: var(--default-pink);
+   background-color: var(--default-pink);
+   transition: all 0.345s;
+}
+
+.tst-container > p {
+   font-size: 1.35rem;
+}
+
+#total-study-time {
+   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+   body {
+      background-image: url(../assets/heart-background-portrait.png);
+      background-position: center;
+   }
 }
