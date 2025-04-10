@@ -119,7 +119,7 @@ const modal = document.querySelector('.settings-modal');
 function saveSettings() {
    const input = document.getElementById('set-pom-minutes');
 
-   const minutes = Number(input.value);
+   const minutes = Math.floor(Number(input.value));
 
    if (!minutes || minutes > 45 || minutes <= 0) {
       alert('Valid input is required!')
