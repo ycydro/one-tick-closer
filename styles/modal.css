@@ -4,8 +4,8 @@
    position: fixed;
    justify-content: center;
    align-items: center;
-   width: 100%;
-   height: 100%;
+   min-width: 100%;
+   height: 100vh;
    background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -16,7 +16,7 @@
    justify-content: center;
    gap: 2rem;
    align-items: center;
-   width: 25%;
+   min-width: 25%;
    height: 25%;
    background-color: rgba(255, 255, 255, 1);
 }
@@ -28,7 +28,10 @@
 }
 
 .settings-body {
-
+   gap: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .settings-footer {
@@ -38,9 +41,10 @@
 }
 
 input[type="number"] {
+   min-width: 25%;
+   max-width: 55%;
    font-size: 1rem;
-   padding: 0.3rem 0.5rem
-
+   padding: 1px 0.5rem
 }
 
 #save-settings,

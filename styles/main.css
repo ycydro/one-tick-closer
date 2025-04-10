@@ -43,16 +43,25 @@ button {
 .timer-option-container {
    display: flex;
    justify-content: center;
-   width: min(auto, 10rem);
 }
 
 .timer-option {
+   font-size: 1rem;
    transition: all 0.345s;
    padding: 0.5rem 1rem;
+   overflow: hidden;
 }
 
 .timer-container {
    font-size: clamp(5rem, -1rem + 8.333vw, 10rem);
+}
+
+.pomodoro-actions {
+   display: flex;
+   flex-wrap: wrap;
+   width: auto;
+   gap: 10px;
+   justify-content: center;
 }
 
 .pomodoro-action {
@@ -68,8 +77,15 @@ button {
    transition: all 0.345s;
 }
 
+.tst-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 .tst-container > p {
-   font-size: 1.35rem;
+   text-align: center;
+   font-size: 1.75rem;
 }
 
 #total-study-time {
@@ -77,6 +93,14 @@ button {
 }
 
 @media (max-width: 768px) {
+   .timer-option {
+      padding: 0.35rem 0.45rem;
+   }
+
+   .tst-container > p {
+      font-size: 4vw;
+   }
+
    body {
       background-image: url(../assets/heart-background-portrait.png);
       background-position: center;
