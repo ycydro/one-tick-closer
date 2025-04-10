@@ -53,6 +53,11 @@ export class PomodoroTimer {
 
       this.stop();
       this.TIMER_MODES[mode].minutes = minutes;
+
+      if (mode === this.mode) {
+         this.#setTime(mode);
+         this.updateUI();
+      }
    }
 
    setMode(mode) {
