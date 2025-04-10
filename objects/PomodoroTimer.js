@@ -3,7 +3,7 @@ import { tracker } from './TimeTracker.js'
 export class PomodoroTimer {
    #intervalID;
    #isTimeRunning = false;
-   #TIMER_MODES = { 
+   TIMER_MODES = { 
       pomodoro: { minutes: 25, seconds: 0 },
       shortBreak: { minutes: 5, seconds: 0 },
       longBreak: { minutes: 10, seconds: 0 }
@@ -13,8 +13,8 @@ export class PomodoroTimer {
    
    constructor(updateCallback) {
       this.updateCallback = updateCallback;
-      this.minutes = this.#TIMER_MODES[this.mode].minutes;
-      this.seconds = this.#TIMER_MODES[this.mode].seconds;
+      this.minutes = this.TIMER_MODES[this.mode].minutes;
+      this.seconds = this.TIMER_MODES[this.mode].seconds;
    }
 
    toggle() {
@@ -42,14 +42,24 @@ export class PomodoroTimer {
 
    reset() {
       this.stop();
-      this.minutes = this.#TIMER_MODES[this.mode].minutes;
-      this.seconds = this.#TIMER_MODES[this.mode].seconds;
+      this.minutes = this.TIMER_MODES[this.mode].minutes;
+      this.seconds = this.TIMER_MODES[this.mode].seconds;
       
       this.updateUI();
    }
 
+   setTimerSettings(mode, minutes) {
+      if (!this.TIMER_MODES[mode]) return;
+
+      this.stop();
+      this.TIMER_MODES[mode].minutes = minutes;
+      this.setMode(mode);
+
+      this.updateUI();
+   }
+
    setMode(mode) {
-      if (!this.#TIMER_MODES[mode]) return;
+      if (!this.TIMER_MODES[mode]) return;
 
       this.stop();
       this.mode = mode;
@@ -89,8 +99,8 @@ export class PomodoroTimer {
    }
 
    #setTime(mode) {
-      this.minutes = this.#TIMER_MODES[mode].minutes;
-      this.seconds = this.#TIMER_MODES[mode].seconds;
+      this.minutes = this.TIMER_MODES[mode].minutes;
+      this.seconds = this.TIMER_MODES[mode].seconds;
    }
 
    #trackTime() {

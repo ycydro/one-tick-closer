@@ -74,8 +74,6 @@ function turnOffToggledButton() {
       toggledButton.classList.remove('is-option-toggled');
    }
 }
-
-
 const resetButton = document.getElementById('reset-btn');
 const pomodoroButton = document.getElementById('pomodoro-btn');
 const shortBreakButton = document.getElementById('short-break-btn');
@@ -111,6 +109,59 @@ longBreakButton.addEventListener('click', () => {
    resetButton.click();
    timer.setMode('longBreak') 
 });
+
+const settingsButton = document.getElementById('settings-btn');
+const saveSettingsButton = document.getElementById('save-settings');
+const closeSettings = document.getElementById('close-settings');
+const minutesInput = document.getElementById('set-pom-minutes');
+const modal = document.querySelector('.settings-modal');
+
+function saveSettings() {
+   const input = document.getElementById('set-pom-minutes');
+
+   const minutes = Number(input.value);
+
+   if (!minutes || minutes > 45 || minutes <= 0) {
+      alert('Valid input is required!')
+      return;
+   }
+
+   timer.setTimerSettings('pomodoro', minutes);
+   document.getElementById('set-pom-minutes').value = null;
+   closeModal();
+}     
+
+function closeModal() {
+   modal.style.display = `none`;
+}
+
+settingsButton.addEventListener('click', () => {
+   modal.style.display = `flex`;
+});
+
+saveSettingsButton.addEventListener('click', () => {
+   resetButton.click();
+   saveSettings();
+});
+
+minutesInput.addEventListener('keypress', (e) => {
+   switch (e.key) {
+      case 'Enter':
+         resetButton.click();
+         saveSettings();
+      break;
+   }
+})
+
+closeSettings.addEventListener('click', () => {
+   closeModal();
+})
+
+window.onclick = function(event) {
+   if (event.target === modal) {
+     closeModal();
+   }
+ }
 
 
 

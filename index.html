@@ -5,6 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href=".//assets/favicon/pink-ribbon.png" type="image/x-icon">
    <link rel="stylesheet" href="./styles/main.css">
+   <link rel="stylesheet" href="./styles/modal.css">
    <title>One Tick Closer</title>
 </head>
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +16,7 @@
    <div class="timer-options">
 
       <div class="timer-option-container">
-         <button class="timer-option" id="pomodoro-btn" data-btn-id="pomodoro">Pomodoro</button>
+         <button class="timer-option is-option-toggled" id="pomodoro-btn" data-btn-id="pomodoro">Pomodoro</button>
       </div>
 
       <div class="timer-option-container">
@@ -33,6 +34,25 @@
    <div class="pomodoro-actions">
       <button id="toggle-btn" class="pomodoro-action">Start</button>
       <button id="reset-btn" class="pomodoro-action">Reset</button>
+      <button id="settings-btn" class="pomodoro-action">Settings</button>
+   </div>
+
+   <div class="modal settings-modal">
+      <div class="settings-content">
+         <div class="settings-header">
+            <p>Pomodoro Settings</p>
+         </div>
+
+         <div class="settings-body">
+            <label for="set-pom-minutes">Minutes: </label>
+            <input type="number" name="" id="set-pom-minutes">
+         </div>
+
+         <div class="settings-footer">
+            <button id="save-settings" type="button">Save</button>
+            <button id="close-settings" type="button">Close</button>
+         </div>
+      </div>
    </div>
 
    <div class="tst-container"></div>

@@ -57,6 +57,7 @@ button {
 
 .pomodoro-action {
    padding: 0.3rem 0.75rem;
+   transition: all 0.145s;
 }
 
 .timer-option:hover,
