@@ -85,7 +85,7 @@ button {
 
 .tst-container > p {
    text-align: center;
-   font-size: 1.75rem;
+   font-size: 1.85rem;
 }
 
 #total-study-time {
@@ -104,5 +104,6 @@ button {
    body {
       background-image: url(../assets/heart-background-portrait.png);
       background-position: center;
+      background-repeat: repeat;
    }
 }
